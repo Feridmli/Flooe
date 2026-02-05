@@ -81,17 +81,18 @@
             height: 100vh;
             background: var(--white);
             border-left: 6px solid var(--black);
-            padding: 100px 40px;
+            padding: 80px 30px;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
             transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
             z-index: 1050;
             box-shadow: -20px 0px 0px rgba(0,0,0,0.1);
+            overflow-y: auto;
         }
         .nav-menu.active { right: 0; }
         
-        .nav-menu a {
+        .nav-menu a, .submenu-trigger {
             text-decoration: none;
             color: var(--black);
             font-weight: 900;
@@ -100,8 +101,29 @@
             padding: 10px 0;
             border-bottom: 4px solid transparent;
             transition: 0.2s;
+            cursor: pointer;
         }
         .nav-menu a:hover { border-bottom-color: var(--black); padding-left: 10px; }
+
+        /* SUBMENU STYLES */
+        .submenu-container { display: flex; flex-direction: column; }
+        .submenu-trigger { display: flex; justify-content: space-between; align-items: center; }
+        .submenu-content {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            padding-left: 15px;
+            margin-top: 5px;
+            border-left: 4px solid var(--black);
+        }
+        .submenu-content.show { display: flex; }
+        .submenu-content a { 
+            font-size: 1rem !important; 
+            padding: 5px 0 !important; 
+            border-bottom: 2px solid transparent !important; 
+        }
+        .arrow { font-size: 0.8rem; transition: 0.3s; }
+        .rotate { transform: rotate(180deg); }
 
         /* HERO */
         .hero { padding: 100px 5%; border-bottom: 4px solid var(--black); }
@@ -126,7 +148,6 @@
         }
         .btn:hover:not(:disabled) { transform: translate(-2px, -2px); box-shadow: 8px 8px 0px var(--black); }
         
-        /* MINT BUTTON SPECIFIC */
         #mint-action-btn {
             width: 100%;
             max-width: 400px;
@@ -142,7 +163,6 @@
             opacity: 0.7;
         }
 
-        /* COUNTDOWN STYLES */
         .countdown-container {
             margin-bottom: 30px;
             display: inline-block;
@@ -152,16 +172,9 @@
             border: 4px solid var(--black);
             box-shadow: 8px 8px 0px var(--bg-ice);
         }
-        #countdown-timer {
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-        }
+        #countdown-timer { font-size: 2.5rem; font-weight: 900; letter-spacing: 2px; }
 
-        .btn-soon {
-            background: #fffafa;
-            box-shadow: 6px 6px 0px var(--red);
-        }
+        .btn-soon { background: #fffafa; box-shadow: 6px 6px 0px var(--red); }
         .btn-soon::before {
             content: 'COMING SOON';
             position: absolute;
@@ -175,7 +188,6 @@
             transform: rotate(5deg);
         }
 
-        /* COMING SOON OVERLAY */
         #soon-overlay {
             display: none;
             position: fixed;
@@ -192,7 +204,6 @@
             box-shadow: 15px 15px 0px black;
         }
 
-        /* GRID SECTIONS */
         section { padding: 80px 5%; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         
@@ -202,29 +213,12 @@
             padding: 30px;
             box-shadow: 10px 10px 0px var(--black);
             position: relative;
-            transition: all 0.3s ease;
         }
         .card h3 { background: var(--black); color: var(--white); display: inline-block; padding: 5px 12px; margin-bottom: 15px; font-size: 0.85rem; text-transform: uppercase; }
         
-        /* MINT PHASE CARDS */
-        .phase-card.active-phase { 
-            transform: scale(1.05); 
-            border-width: 6px; 
-            z-index: 5; 
-            box-shadow: 15px 15px 0px var(--black);
-        }
+        .phase-card.active-phase { transform: scale(1.05); border-width: 6px; z-index: 5; box-shadow: 15px 15px 0px var(--black); }
         .phase-card.completed-phase { opacity: 0.6; }
-
-        .phase-status { 
-            position: absolute; 
-            top: -15px; 
-            right: 15px; 
-            padding: 4px 12px; 
-            font-weight: 900; 
-            font-size: 0.75rem; 
-            border: 3px solid black; 
-            background: #fff;
-        }
+        .phase-status { position: absolute; top: -15px; right: 15px; padding: 4px 12px; font-weight: 900; font-size: 0.75rem; border: 3px solid black; background: #fff; }
         
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
         .pulse { animation: pulse 1.5s infinite; }
@@ -247,7 +241,18 @@
         <span></span><span></span><span></span>
     </button>
     <nav class="nav-menu" id="navMenu">
-        <a href="https://twitter.com/flooeinc" target="_blank">X (TWITTER)</a>
+        <div class="submenu-container">
+            <div class="submenu-trigger" onclick="toggleSubmenu()">
+                X (TWITTER) <span class="arrow" id="arrow">▼</span>
+            </div>
+            <div class="submenu-content" id="twitterSubmenu">
+                <a href="https://x.com/flooeinc" target="_blank">Flooe Inc</a>
+                <a href="https://x.com/plumpychums" target="_blank">Plumpy Chums</a>
+                <a href="https://x.com/lilplumpys" target="_blank">Lil Plumpys</a>
+                <a href="https://x.com/chumbleapp" target="_blank">Chumble App</a>
+            </div>
+        </div>
+        
         <a href="https://t.me/FlooeInc" target="_blank">TELEGRAM</a>
         <a href="http://dcd.gg/FlooeInc" target="_blank">DISCORD</a>
         <a href="https://opensea.io/" target="_blank">OPENSEA</a>
@@ -335,19 +340,25 @@
 
 <script>
     function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
+    
+    function toggleSubmenu() {
+        const submenu = document.getElementById('twitterSubmenu');
+        const arrow = document.getElementById('arrow');
+        submenu.classList.toggle('show');
+        arrow.classList.toggle('rotate');
+    }
+
     function showSoon() {
         const overlay = document.getElementById('soon-overlay');
         overlay.style.display = 'block';
         setTimeout(() => { overlay.style.display = 'none'; }, 2000);
     }
 
-    // MINT ZAMANLAYICI VƏ GERİ SAYIM SİSTEMİ
     function updateMintStatus() {
         const now = new Date();
-        const mintStartTime = new Date(2026, 1, 7, 19, 0, 0).getTime(); // 7 Fevral 19:00
+        const mintStartTime = new Date(2026, 1, 7, 19, 0, 0).getTime(); 
         const currentTime = now.getTime();
 
-        // Geri sayım hesablaması
         const diff = mintStartTime - currentTime;
         const countdownEl = document.getElementById('countdown-timer');
         const mintBtn = document.getElementById('mint-action-btn');
@@ -357,20 +368,14 @@
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const secs = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            countdownEl.innerText = 
-                `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-            
+            countdownEl.innerText = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
             mintBtn.disabled = true;
-            mintBtn.innerText = "MINT IS LOCKED";
         } else {
-            document.getElementById('countdown-wrapper').style.display = 'none';
+            if(document.getElementById('countdown-wrapper')) document.getElementById('countdown-wrapper').style.display = 'none';
             mintBtn.disabled = false;
             mintBtn.innerText = "MINT NOW";
-            mintBtn.style.background = "var(--green)";
         }
 
-        // Fazaların rənglənməsi (sizin mövcud kodunuz)
         const p1Start = mintStartTime;
         const p2Start = new Date(2026, 1, 7, 20, 0).getTime();
         const p3Start = new Date(2026, 1, 7, 21, 0).getTime();
@@ -386,6 +391,7 @@
         phases.forEach((p) => {
             const card = document.getElementById(p.id);
             const status = document.getElementById(p.statusId);
+            if(!card || !status) return;
             card.classList.remove("active-phase", "completed-phase");
             status.classList.remove("pulse");
 
@@ -408,7 +414,6 @@
     setInterval(updateMintStatus, 1000);
     updateMintStatus();
 
-    // Qar dənəcikləri
     function createSnowflake() {
         const snow = document.getElementById('snow');
         const flake = document.createElement('div');
