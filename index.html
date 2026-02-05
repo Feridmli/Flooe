@@ -130,6 +130,45 @@
         .hero { padding: 100px 5%; border-bottom: 4px solid var(--black); }
         h1 { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; line-height: 0.9; margin-bottom: 30px; }
         
+        /* NFT SLIDER */
+        .slider-section {
+            background: var(--white);
+            padding: 60px 0;
+            border-top: 4px solid var(--black);
+            border-bottom: 4px solid var(--black);
+            overflow: hidden;
+            position: relative;
+        }
+        .slider-track {
+            display: flex;
+            width: calc(240px * 10);
+            animation: slideScroll 15s linear infinite;
+        }
+        .slider-track:hover { animation-play-state: paused; }
+        .nft-card {
+            width: 200px;
+            height: 200px;
+            margin: 0 20px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+            border: 4px solid var(--black);
+            box-shadow: 8px 8px 0px var(--black);
+            flex-shrink: 0;
+        }
+
+        /* NFT ŞƏKİLLƏRİ BURADA */
+        #nft1, #nft1-copy { background-image: url('https://cdn.discordapp.com/attachments/1458768504390946928/1468890994559946866/Adsz_-_4_Subat_2026_02.39.12.jpg?ex=6985aad7&is=69845957&hm=c07f8ac0146b394ffd4108fb3692560fce75916238d32822cd4621fe181a6c03&'); }
+        #nft2, #nft2-copy { background-image: url('https://cdn.discordapp.com/attachments/1458768504390946928/1468891306888794113/Adsz_-_4_Subat_2026_02.39.12.jpg?ex=6985ab22&is=698459a2&hm=f0bd53d703624e4edaebac40a5431bf9c3b3ea74f8f136aa0137dd39621521d7&'); }
+        #nft3, #nft3-copy { background-image: url('https://cdn.discordapp.com/attachments/1458768504390946928/1468891372957204502/Adsz_-_4_Subat_2026_02.39.12.jpg?ex=6985ab31&is=698459b1&hm=fdff10a944dae907ea2e3d13c6dd727335d949a9260a5ea15b5e1d6448ea8c22&'); }
+        #nft4, #nft4-copy { background-image: url('https://cdn.discordapp.com/attachments/1458768504390946928/1468891444239401002/Adsz_-_4_Subat_2026_02.39.12.jpg?ex=6985ab42&is=698459c2&hm=7bea3285c0b9c519ba9ba4eb6db0b906ecccff554d98538dc635cc53bce6039f&'); }
+        #nft5, #nft5-copy { background-image: url('https://cdn.discordapp.com/attachments/1458768504390946928/1468891507674320906/Adsz_-_4_Subat_2026_02.39.12.jpg?ex=6985ab52&is=698459d2&hm=3ad50a608dc7460ee003b8f30e5976118433b9ee5ce0ca0f271e85b45e6a79dc&'); }
+
+        @keyframes slideScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-240px * 5)); }
+        }
+
         /* BUTTONS */
         .btn-container { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 30px; }
         .btn {
@@ -244,7 +283,7 @@
     <nav class="nav-menu" id="navMenu">
         <div class="submenu-container">
             <div class="submenu-trigger" onclick="toggleSubmenu('twitterSubmenu', 'arrow1')">
-                X <span class="arrow" id="arrow1">▼</span>
+                X (TWITTER) <span class="arrow" id="arrow1">▼</span>
             </div>
             <div class="submenu-content" id="twitterSubmenu">
                 <a href="https://x.com/flooeinc" target="_blank">Flooe Inc</a>
@@ -253,10 +292,8 @@
                 <a href="https://x.com/chumbleapp" target="_blank">Chumble App</a>
             </div>
         </div>
-
         <a href="https://t.me/FlooeInc" target="_blank">TELEGRAM</a>
         <a href="http://dcd.gg/FlooeInc" target="_blank">DISCORD</a>
-
         <div class="submenu-container">
             <div class="submenu-trigger" onclick="toggleSubmenu('openseaSubmenu', 'arrow2')">
                 OPENSEA <span class="arrow" id="arrow2">▼</span>
@@ -280,6 +317,21 @@
         </div>
     </section>
 
+    <div class="slider-section">
+        <div class="slider-track">
+            <div class="nft-card" id="nft1"></div>
+            <div class="nft-card" id="nft2"></div>
+            <div class="nft-card" id="nft3"></div>
+            <div class="nft-card" id="nft4"></div>
+            <div class="nft-card" id="nft5"></div>
+            <div class="nft-card" id="nft1-copy"></div>
+            <div class="nft-card" id="nft2-copy"></div>
+            <div class="nft-card" id="nft3-copy"></div>
+            <div class="nft-card" id="nft4-copy"></div>
+            <div class="nft-card" id="nft5-copy"></div>
+        </div>
+    </div>
+
     <div class="ticker-wrap">
         <div class="ticker">
             <span>$CHUMBLE TOKEN /// PLUMPY CHUMS (PCH) /// LIL PLUMPYS (LP) /// MINT IS LIVE ///</span>
@@ -287,7 +339,7 @@
         </div>
     </div>
 
-    <section style="background: var(--white); border-top: 4px solid var(--black); border-bottom: 4px solid var(--black); text-align: center;">
+    <section style="background: var(--white); text-align: center;">
         <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 20px; text-transform: uppercase;">Mint Schedule</h2>
         
         <div id="countdown-wrapper">
@@ -306,40 +358,25 @@
                 <div class="phase-status" id="status1">WAITING</div>
                 <h3>PHASE 01</h3>
                 <h2>PILLARS</h2>
-                <div style="margin-top: 20px; font-weight: 700;">
-                    <p>PRICE: FREE</p>
-                    <p>TIME: 19:00 - 20:00</p>
-                </div>
+                <div style="margin-top: 20px; font-weight: 700;"><p>PRICE: FREE</p><p>TIME: 19:00 - 20:00</p></div>
             </div>
-
             <div class="card phase-card" id="phase2">
                 <div class="phase-status" id="status2">WAITING</div>
                 <h3>PHASE 02</h3>
                 <h2>GTD LIST</h2>
-                <div style="margin-top: 20px; font-weight: 700;">
-                    <p>PRICE: FREE</p>
-                    <p>TIME: 20:00 - 21:00</p>
-                </div>
+                <div style="margin-top: 20px; font-weight: 700;"><p>PRICE: FREE</p><p>TIME: 20:00 - 21:00</p></div>
             </div>
-
             <div class="card phase-card" id="phase3">
                 <div class="phase-status" id="status3">WAITING</div>
                 <h3>PHASE 03</h3>
                 <h2>FCFS</h2>
-                <div style="margin-top: 20px; font-weight: 700;">
-                    <p>PRICE: 0.0017 ETH</p>
-                    <p>TIME: 21:00 - 22:00</p>
-                </div>
+                <div style="margin-top: 20px; font-weight: 700;"><p>PRICE: 0.0017 ETH</p><p>TIME: 21:00 - 22:00</p></div>
             </div>
-
             <div class="card phase-card" id="phase4">
                 <div class="phase-status" id="status4">WAITING</div>
                 <h3>PHASE 04</h3>
                 <h2>PUBLIC</h2>
-                <div style="margin-top: 20px; font-weight: 700;">
-                    <p>PRICE: 0.003 ETH</p>
-                    <p>TIME: 22:00+</p>
-                </div>
+                <div style="margin-top: 20px; font-weight: 700;"><p>PRICE: 0.003 ETH</p><p>TIME: 22:00+</p></div>
             </div>
         </div>
     </section>
@@ -351,26 +388,21 @@
 
 <script>
     function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
-    
-    // Universal submenu toggle function
     function toggleSubmenu(submenuId, arrowId) {
         const submenu = document.getElementById(submenuId);
         const arrow = document.getElementById(arrowId);
         submenu.classList.toggle('show');
         arrow.classList.toggle('rotate');
     }
-
     function showSoon() {
         const overlay = document.getElementById('soon-overlay');
         overlay.style.display = 'block';
         setTimeout(() => { overlay.style.display = 'none'; }, 2000);
     }
-
     function updateMintStatus() {
         const now = new Date();
         const mintStartTime = new Date(2026, 1, 7, 19, 0, 0).getTime(); 
         const currentTime = now.getTime();
-
         const diff = mintStartTime - currentTime;
         const countdownEl = document.getElementById('countdown-timer');
         const mintBtn = document.getElementById('mint-action-btn');
@@ -381,23 +413,17 @@
             const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const secs = Math.floor((diff % (1000 * 60)) / 1000);
             if(countdownEl) countdownEl.innerText = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-            mintBtn.disabled = true;
         } else {
             if(document.getElementById('countdown-wrapper')) document.getElementById('countdown-wrapper').style.display = 'none';
             mintBtn.disabled = false;
             mintBtn.innerText = "MINT NOW";
         }
 
-        const p1Start = mintStartTime;
-        const p2Start = new Date(2026, 1, 7, 20, 0).getTime();
-        const p3Start = new Date(2026, 1, 7, 21, 0).getTime();
-        const p4Start = new Date(2026, 1, 7, 22, 0).getTime();
-
         const phases = [
-            { id: "phase1", statusId: "status1", start: p1Start, end: p2Start },
-            { id: "phase2", statusId: "status2", start: p2Start, end: p3Start },
-            { id: "phase3", statusId: "status3", start: p3Start, end: p4Start },
-            { id: "phase4", statusId: "status4", start: p4Start, end: Infinity }
+            { id: "phase1", statusId: "status1", start: mintStartTime, end: mintStartTime + 3600000 },
+            { id: "phase2", statusId: "status2", start: mintStartTime + 3600000, end: mintStartTime + 7200000 },
+            { id: "phase3", statusId: "status3", start: mintStartTime + 7200000, end: mintStartTime + 10800000 },
+            { id: "phase4", statusId: "status4", start: mintStartTime + 10800000, end: Infinity }
         ];
 
         phases.forEach((p) => {
@@ -405,12 +431,9 @@
             const status = document.getElementById(p.statusId);
             if(!card || !status) return;
             card.classList.remove("active-phase", "completed-phase");
-            status.classList.remove("pulse");
-
             if (currentTime >= p.start && currentTime < p.end) {
                 card.classList.add("active-phase");
                 status.innerText = "LIVE NOW";
-                status.classList.add("pulse");
                 status.style.background = "var(--green)";
             } else if (currentTime >= p.end) {
                 card.classList.add("completed-phase");
@@ -418,14 +441,11 @@
                 status.style.background = "#ddd";
             } else {
                 status.innerText = "UPCOMING";
-                status.style.background = "#fff";
             }
         });
     }
-
     setInterval(updateMintStatus, 1000);
     updateMintStatus();
-
     function createSnowflake() {
         const snow = document.getElementById('snow');
         if(!snow) return;
@@ -438,8 +458,7 @@
         snow.appendChild(flake);
         setTimeout(() => flake.remove(), 5000);
     }
-    setInterval(createSnowflake, 100);
+    setInterval(createSnowflake, 150);
 </script>
-
 </body>
 </html>
