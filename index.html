@@ -84,7 +84,7 @@
             padding: 80px 30px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
             transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
             z-index: 1050;
             box-shadow: -20px 0px 0px rgba(0,0,0,0.1);
@@ -106,21 +106,22 @@
         .nav-menu a:hover { border-bottom-color: var(--black); padding-left: 10px; }
 
         /* SUBMENU STYLES */
-        .submenu-container { display: flex; flex-direction: column; }
+        .submenu-container { display: flex; flex-direction: column; margin-bottom: 5px; }
         .submenu-trigger { display: flex; justify-content: space-between; align-items: center; }
         .submenu-content {
             display: none;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             padding-left: 15px;
             margin-top: 5px;
             border-left: 4px solid var(--black);
         }
         .submenu-content.show { display: flex; }
         .submenu-content a { 
-            font-size: 1rem !important; 
+            font-size: 0.95rem !important; 
             padding: 5px 0 !important; 
             border-bottom: 2px solid transparent !important; 
+            font-weight: 700 !important;
         }
         .arrow { font-size: 0.8rem; transition: 0.3s; }
         .rotate { transform: rotate(180deg); }
@@ -242,8 +243,8 @@
     </button>
     <nav class="nav-menu" id="navMenu">
         <div class="submenu-container">
-            <div class="submenu-trigger" onclick="toggleSubmenu()">
-                X <span class="arrow" id="arrow">▼</span>
+            <div class="submenu-trigger" onclick="toggleSubmenu('twitterSubmenu', 'arrow1')">
+                X <span class="arrow" id="arrow1">▼</span>
             </div>
             <div class="submenu-content" id="twitterSubmenu">
                 <a href="https://x.com/flooeinc" target="_blank">Flooe Inc</a>
@@ -252,10 +253,20 @@
                 <a href="https://x.com/chumbleapp" target="_blank">Chumble App</a>
             </div>
         </div>
-        
+
         <a href="https://t.me/FlooeInc" target="_blank">TELEGRAM</a>
         <a href="http://dcd.gg/FlooeInc" target="_blank">DISCORD</a>
-        <a href="https://opensea.io/" target="_blank">OPENSEA</a>
+
+        <div class="submenu-container">
+            <div class="submenu-trigger" onclick="toggleSubmenu('openseaSubmenu', 'arrow2')">
+                OPENSEA <span class="arrow" id="arrow2">▼</span>
+            </div>
+            <div class="submenu-content" id="openseaSubmenu">
+                <a href="https://opensea.io/FlooeInc" target="_blank">Flooe Inc</a>
+                <a href="https://opensea.io/collection/plumpychums" target="_blank">Plumpy Chums</a>
+                <a href="https://opensea.io/collection/lilplumpys" target="_blank">Lil Plumpys</a>
+            </div>
+        </div>
     </nav>
 </header>
 
@@ -341,9 +352,10 @@
 <script>
     function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
     
-    function toggleSubmenu() {
-        const submenu = document.getElementById('twitterSubmenu');
-        const arrow = document.getElementById('arrow');
+    // Universal submenu toggle function
+    function toggleSubmenu(submenuId, arrowId) {
+        const submenu = document.getElementById(submenuId);
+        const arrow = document.getElementById(arrowId);
         submenu.classList.toggle('show');
         arrow.classList.toggle('rotate');
     }
@@ -368,7 +380,7 @@
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const secs = Math.floor((diff % (1000 * 60)) / 1000);
-            countdownEl.innerText = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            if(countdownEl) countdownEl.innerText = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
             mintBtn.disabled = true;
         } else {
             if(document.getElementById('countdown-wrapper')) document.getElementById('countdown-wrapper').style.display = 'none';
@@ -416,6 +428,7 @@
 
     function createSnowflake() {
         const snow = document.getElementById('snow');
+        if(!snow) return;
         const flake = document.createElement('div');
         flake.classList.add('snowflake');
         flake.style.width = flake.style.height = Math.random() * 5 + 2 + 'px';
