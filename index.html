@@ -165,6 +165,41 @@
         #nft4, #nft4-copy { background-image: url('https://cdn.discordapp.com/attachments/1458768504390946928/1468891444239401002/Adsz_-_4_Subat_2026_02.39.12.jpg?ex=6985ab42&is=698459c2&hm=7bea3285c0b9c519ba9ba4eb6db0b906ecccff554d98538dc635cc53bce6039f&'); }
         #nft5, #nft5-copy { background-image: url('https://cdn.discordapp.com/attachments/1458768504390946928/1468891507674320906/Adsz_-_4_Subat_2026_02.39.12.jpg?ex=6985ab52&is=698459d2&hm=3ad50a608dc7460ee003b8f30e5976118433b9ee5ce0ca0f271e85b45e6a79dc&'); }
 
+        /* WHITELIST MODAL STYLES (AKTARIILAN) */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background: var(--bg-ice); border: 6px solid var(--black); padding: 40px;
+            max-width: 500px; width: 100%; position: relative; box-shadow: 15px 15px 0px var(--black);
+        }
+        .modal-close { position: absolute; top: 10px; right: 15px; font-size: 2rem; font-weight: 900; cursor: pointer; }
+        
+        .back-arrow {
+            display: inline-block; cursor: pointer; font-weight: 900; font-size: 0.9rem;
+            margin-bottom: 15px; text-transform: uppercase; transition: 0.2s;
+        }
+        .back-arrow:hover { text-decoration: underline; }
+
+        .modal-step { display: none; flex-direction: column; gap: 20px; }
+        .modal-step.active { display: flex; }
+        .modal-step h2 { font-size: 1.5rem; text-transform: uppercase; border-bottom: 4px solid black; padding-bottom: 10px; }
+        
+        .wl-option {
+            background: var(--white); padding: 20px; border: 4px solid var(--black);
+            font-weight: 900; text-align: center; transition: 0.2s;
+            display: flex; flex-direction: column; gap: 5px; cursor: pointer;
+        }
+        .wl-option:hover:not(.wl-option-disabled) { transform: translate(-3px, -3px); box-shadow: 5px 5px 0px black; }
+        .wl-option-disabled { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+        .wl-status-tag { font-size: 0.8rem; font-weight: 900; padding: 2px 8px; border: 2px solid black; display: inline-block; margin: 0 auto; }
+        
+        .wl-input { width: 100%; padding: 15px; border: 4px solid var(--black); font-size: 1rem; font-weight: 700; outline: none; }
+        .wl-btn-send { background: var(--black); color: white; padding: 15px; border: none; font-weight: 900; text-transform: uppercase; cursor: pointer; }
+        .wl-final-text { color: var(--red); font-size: 2.5rem; font-weight: 900; text-align: center; padding: 20px 0; }
+
         /* ROADMAP */
         .roadmap-container { position: relative; max-width: 1000px; margin: 40px auto; padding: 20px 0; }
         .roadmap-container::after { content: ''; position: absolute; width: 6px; background: var(--black); top: 0; bottom: 0; left: 50%; margin-left: -3px; }
@@ -217,6 +252,49 @@
 <div class="snow-container" id="snow"></div>
 <div id="soon-overlay">COMING SOON</div>
 
+<div class="modal-overlay" id="wlModal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeWL()">&times;</span>
+        
+        <div class="modal-step active" id="wlStep1">
+            <h2>Select Collection</h2>
+            <div class="wl-option" onclick="nextWLStep(2)">
+                PLUMPY CHUMS
+            </div>
+            <div class="wl-option wl-option-disabled">
+                LIL PLUMPYS
+                <div class="wl-status-tag" style="background: var(--red); color: white;">COMING SOON</div>
+            </div>
+        </div>
+
+        <div class="modal-step" id="wlStep2">
+            <div class="back-arrow" onclick="nextWLStep(1)">← Back to collection</div>
+            <h2>Step 1: Twitter</h2>
+            <p>Please enter your Twitter (X) address:</p>
+            <input type="text" class="wl-input" id="twitterInput" placeholder="@username">
+            <button class="wl-btn-send" onclick="nextWLStep(3)">CONTINUE</button>
+        </div>
+
+        <div class="modal-step" id="wlStep3">
+            <div class="back-arrow" onclick="nextWLStep(2)">← Back to Twitter</div>
+            <h2>Step 2: Choose Method</h2>
+            <div class="wl-option" onclick="showFinalInput('Wallet Address')">WALLET ADDRESS</div>
+            <div class="wl-option" onclick="showFinalInput('File Link')">FILE LINK</div>
+        </div>
+
+        <div class="modal-step" id="wlStep4">
+            <div class="back-arrow" onclick="nextWLStep(3)">← Back to method</div>
+            <h2 id="finalTitle">Input</h2>
+            <input type="text" class="wl-input" id="finalInput" placeholder="Enter here...">
+            <button class="wl-btn-send" onclick="nextWLStep(5)">SEND</button>
+        </div>
+
+        <div class="modal-step" id="wlStep5">
+            <div class="wl-final-text">WHITELIST END</div>
+        </div>
+    </div>
+</div>
+
 <header>
     <div class="logo">FLOOE<span>INC.</span></div>
     <button class="menu-toggle" onclick="toggleMenu()">
@@ -225,13 +303,23 @@
     <nav class="nav-menu" id="navMenu">
         <div class="submenu-container">
             <div class="submenu-trigger" onclick="toggleSubmenu('twitterSubmenu', 'arrow1')">
-                X (Twitter) <span class="arrow" id="arrow1">▼</span>
+                X <span class="arrow" id="arrow1">▼</span>
             </div>
             <div class="submenu-content" id="twitterSubmenu">
                 <a href="https://x.com/flooeinc" target="_blank">Flooe Inc</a>
                 <a href="https://x.com/plumpychums" target="_blank">Plumpy Chums</a>
                 <a href="https://x.com/lilplumpys" target="_blank">Lil Plumpys</a>
                 <a href="https://x.com/chumbleapp" target="_blank">Chumble App</a>
+            </div>
+        </div>
+
+        <div class="submenu-container">
+            <div class="submenu-trigger" onclick="toggleSubmenu('wlSubmenu', 'arrow3')">
+                WHITELIST <span class="arrow" id="arrow3">▼</span>
+            </div>
+            <div class="submenu-content" id="wlSubmenu">
+                <a href="javascript:void(0)" onclick="openWL()">Plumpy Chums</a>
+                <a href="javascript:void(0)" onclick="openWL()">Lil Plumpys</a>
             </div>
         </div>
 
@@ -261,6 +349,7 @@
             <a href="https://opensea.io/FlooeInc" class="btn" target="_blank" style="background: var(--blue); color: white;">FLOOE INC. OPENSEA</a>
             <a href="https://opensea.io/collection/plumpychums" class="btn" target="_blank">PLUMPY CHUMS (PCH)</a>
             <button class="btn btn-soon" onclick="showSoon()">LIL PLUMPYS (LP)</button>
+            <button class="btn" style="background: var(--green);" onclick="openWL()">JOIN WHITELIST</button>
         </div>
     </section>
 
@@ -343,7 +432,7 @@
             <div class="tag" style="background: var(--blue);">Coming Soon</div>
             <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1;">LIL PLUMPYS SNEAK PEEK</h2>
             <p style="margin: 20px 0; font-weight: 700;">The next evolution. Smaller, plumper, and full of utility.</p>
-            <button class="btn" onclick="alert('Stay tuned on Discord!')">GET NOTIFIED</button>
+            <button class="btn" onclick="openWL()">GET WHITELISTED</button>
         </div>
     </section>
 
@@ -430,6 +519,36 @@
 <footer><p>© 2026 THE FLOOE COMPANY. PROTECT THE SOUL.</p></footer>
 
 <script>
+    /* WHITELIST FUNCTIONS (BİRİNCİ KODDAN AKTARILAN) */
+    function openWL() { 
+        resetWL();
+        document.getElementById('wlModal').style.display = 'flex'; 
+    }
+    function closeWL() { document.getElementById('wlModal').style.display = 'none'; }
+    
+    function resetWL() {
+        for(let i=1; i<=5; i++) {
+            let step = document.getElementById('wlStep'+i);
+            if(step) step.classList.remove('active');
+        }
+        document.getElementById('wlStep1').classList.add('active');
+    }
+
+    function nextWLStep(step) {
+        for(let i=1; i<=5; i++) {
+            let stepEl = document.getElementById('wlStep'+i);
+            if(stepEl) stepEl.classList.remove('active');
+        }
+        document.getElementById('wlStep'+step).classList.add('active');
+    }
+
+    function showFinalInput(type) {
+        document.getElementById('finalTitle').innerText = type;
+        document.getElementById('finalInput').placeholder = "Enter " + type;
+        nextWLStep(4);
+    }
+
+    /* MENU & UI FUNCTIONS */
     function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
     function toggleSubmenu(sid, aid) {
         document.getElementById(sid).classList.toggle('show');
@@ -440,6 +559,7 @@
         o.style.display = 'block'; setTimeout(() => o.style.display = 'none', 2000);
     }
 
+    /* MINT & TIMER FUNCTIONS */
     function updateMintStatus() {
         const now = new Date();
         const start = new Date(2026, 1, 7, 19, 0, 0).getTime(); 
@@ -453,11 +573,11 @@
             const h = Math.floor((diff % 86400000) / 3600000);
             const m = Math.floor((diff % 3600000) / 60000);
             const s = Math.floor((diff % 60000) / 1000);
-            timer.innerText = `${d.toString().padStart(2,'0')}:${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            if(timer) timer.innerText = `${d.toString().padStart(2,'0')}:${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
         } else {
             const wrap = document.getElementById('countdown-wrapper');
             if(wrap) wrap.style.display = 'none';
-            mBtn.disabled = false; mBtn.innerText = "MINT NOW";
+            if(mBtn) { mBtn.disabled = false; mBtn.innerText = "MINT NOW"; }
         }
 
         const phases = [
@@ -483,8 +603,10 @@
     setInterval(updateMintStatus, 1000);
     updateMintStatus();
 
+    /* SNOW EFFECT */
     function createSnow() {
         const s = document.getElementById('snow');
+        if(!s) return;
         const f = document.createElement('div');
         f.classList.add('snowflake');
         f.style.width = f.style.height = Math.random() * 5 + 2 + 'px';
