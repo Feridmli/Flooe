@@ -157,7 +157,7 @@
             flex-shrink: 0;
         }
 
-        /* NFT ŞƏKİLLƏRİ BURADA */
+        /* NFT IMAGES FROM USER LINKS */
         #nft1, #nft1-copy { background-image: url('https://cdn.discordapp.com/attachments/1458768504390946928/1468890994559946866/Adsz_-_4_Subat_2026_02.39.12.jpg?ex=6985aad7&is=69845957&hm=c07f8ac0146b394ffd4108fb3692560fce75916238d32822cd4621fe181a6c03&'); }
         #nft2, #nft2-copy { background-image: url('https://cdn.discordapp.com/attachments/1458768504390946928/1468891306888794113/Adsz_-_4_Subat_2026_02.39.12.jpg?ex=6985ab22&is=698459a2&hm=f0bd53d703624e4edaebac40a5431bf9c3b3ea74f8f136aa0137dd39621521d7&'); }
         #nft3, #nft3-copy { background-image: url('https://cdn.discordapp.com/attachments/1458768504390946928/1468891372957204502/Adsz_-_4_Subat_2026_02.39.12.jpg?ex=6985ab31&is=698459b1&hm=fdff10a944dae907ea2e3d13c6dd727335d949a9260a5ea15b5e1d6448ea8c22&'); }
@@ -267,6 +267,38 @@
         .ticker { display: flex; animation: scroll 25s linear infinite; white-space: nowrap; font-weight: 900; font-size: 1.1rem; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
+        /* FAQ STYLES */
+        .faq-item {
+            background: var(--white);
+            border: 4px solid var(--black);
+            margin-bottom: 15px;
+            box-shadow: 6px 6px 0px var(--black);
+            transition: 0.2s;
+        }
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            user-select: none;
+        }
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        .faq-item.active-faq { box-shadow: 10px 10px 0px var(--black); transform: translate(-2px, -2px); }
+        .faq-item.active-faq .faq-answer { max-height: 300px; padding: 20px; border-top: 4px solid var(--black); }
+        .faq-icon { font-size: 1.5rem; transition: transform 0.3s; }
+        .faq-item.active-faq .faq-icon { transform: rotate(45deg); }
+
         footer { background: var(--black); color: var(--white); padding: 60px 5%; text-align: center; }
     </style>
 </head>
@@ -283,7 +315,7 @@
     <nav class="nav-menu" id="navMenu">
         <div class="submenu-container">
             <div class="submenu-trigger" onclick="toggleSubmenu('twitterSubmenu', 'arrow1')">
-                X (TWITTER) <span class="arrow" id="arrow1">▼</span>
+                X <span class="arrow" id="arrow1">▼</span>
             </div>
             <div class="submenu-content" id="twitterSubmenu">
                 <a href="https://x.com/flooeinc" target="_blank">Flooe Inc</a>
@@ -292,8 +324,10 @@
                 <a href="https://x.com/chumbleapp" target="_blank">Chumble App</a>
             </div>
         </div>
+
         <a href="https://t.me/FlooeInc" target="_blank">TELEGRAM</a>
         <a href="http://dcd.gg/FlooeInc" target="_blank">DISCORD</a>
+
         <div class="submenu-container">
             <div class="submenu-trigger" onclick="toggleSubmenu('openseaSubmenu', 'arrow2')">
                 OPENSEA <span class="arrow" id="arrow2">▼</span>
@@ -380,6 +414,48 @@
             </div>
         </div>
     </section>
+
+    <section class="faq-section" style="background-color: var(--bg-ice); border-top: 4px solid var(--black);">
+        <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 40px; text-transform: uppercase; text-align: center;">F.A.Q.</h2>
+        <div class="faq-container" style="max-width: 800px; margin: 0 auto;">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>WHAT IS FLOOE INC?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Flooe Inc. is a creative ecosystem focused on building digital collectibles and interactive experiences. We aim to keep our community "plumpy" and active through art and utility.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>HOW CAN I JOIN THE MINT?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>You can join the mint by connecting your wallet to OpenSea during the scheduled phase times. Check the "Mint Schedule" section above to see your eligibility.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>WHAT IS $CHUMBLE TOKEN?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>$CHUMBLE is the native utility token of the Flooe ecosystem, designed to reward long-term holders and fuel our upcoming Chumble App.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>WHERE CAN I TRADE MY NFTS?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>After the mint, all Plumpy Chums and Lil Plumpys can be traded on secondary markets like OpenSea and Blur.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
 <footer>
@@ -388,17 +464,24 @@
 
 <script>
     function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
+    
     function toggleSubmenu(submenuId, arrowId) {
         const submenu = document.getElementById(submenuId);
         const arrow = document.getElementById(arrowId);
         submenu.classList.toggle('show');
         arrow.classList.toggle('rotate');
     }
+
+    function toggleFaq(element) {
+        element.parentElement.classList.toggle('active-faq');
+    }
+
     function showSoon() {
         const overlay = document.getElementById('soon-overlay');
         overlay.style.display = 'block';
         setTimeout(() => { overlay.style.display = 'none'; }, 2000);
     }
+
     function updateMintStatus() {
         const now = new Date();
         const mintStartTime = new Date(2026, 1, 7, 19, 0, 0).getTime(); 
@@ -444,8 +527,10 @@
             }
         });
     }
+
     setInterval(updateMintStatus, 1000);
     updateMintStatus();
+
     function createSnowflake() {
         const snow = document.getElementById('snow');
         if(!snow) return;
@@ -460,5 +545,6 @@
     }
     setInterval(createSnowflake, 150);
 </script>
+
 </body>
 </html>
