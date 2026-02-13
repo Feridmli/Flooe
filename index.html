@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plumpies Home. | Stay Plumpy</title>
+    <title>Plumpys Home. | Stay Plumpy</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
@@ -184,12 +184,6 @@
             position: relative;
         }
         .btn:hover:not(:disabled) { transform: translate(-2px, -2px); box-shadow: 8px 8px 0px var(--black); }
-        
-        .btn-soon::before {
-            content: 'COMING SOON'; position: absolute; top: -12px; right: -5px;
-            background: var(--red); color: white; font-size: 0.6rem; padding: 2px 8px;
-            border: 2px solid var(--black); transform: rotate(5deg);
-        }
 
         #soon-overlay {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-5deg);
@@ -327,9 +321,9 @@
                 PLUMPY CHUMS
                 <span>WHITELIST END</span>
             </div>
-            <div class="wl-option" style="cursor: not-allowed; opacity: 0.7;">
+            <div class="wl-option" onclick="window.open('https://opensea.io/collection/lilplumpys/overview', '_blank')">
                 LIL PLUMPYS
-                <span>WHITELIST COMING SOON</span>
+                <span>JOIN VIA OPENSEA</span>
             </div>
         </div>
     </div>
@@ -388,8 +382,8 @@
         <div class="btn-container">
             <a href="https://opensea.io/PlumpiesHome" class="btn" target="_blank" style="background: var(--blue); color: white;">PLUMPİES HOME. OPENSEA</a>
             <a href="https://opensea.io/collection/plumpychums" class="btn" target="_blank">PLUMPY CHUMS (PCH)</a>
-            <button class="btn btn-soon" onclick="showSoon()">LIL PLUMPYS (LP)</button>
-            <button class="btn" style="background: var(--green);" onclick="openWL()">JOIN WHITELIST</button>
+            <a href="https://opensea.io/collection/lilplumpys/overview" class="btn" target="_blank">LIL PLUMPYS (LP)</a>
+            <button class="btn" style="background: var(--green);" onclick="openWL()">CHECK ELIGIBILITY</button>
         </div>
     </section>
 
@@ -423,7 +417,7 @@
             <div class="benefit-card">
                 <div class="tag">Priority Access</div>
                 <h3>LIL PLUMPYS MINT</h3>
-                <p>Plumpy Chums (PCH) holders are our VIPs. Holding a PCH grants you guaranteed whitelist or free-claim opportunities.</p>
+                <p>Plumpy Chums (PCH) holders are our VIPs. Holding a PCH grants you guaranteed whitelist or free-claim opportunities for Lil Plumpys.</p>
             </div>
             <div class="benefit-card">
                 <div class="tag">Future Utility</div>
@@ -444,36 +438,34 @@
     </section>
 
     <section style="background: var(--white); text-align: center; padding: 80px 5%; border-top: 4px solid black;">
-        <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 20px;">MINT SCHEDULE</h2>
+        <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 20px;">LIL PLUMPYS MINT SCHEDULE</h2>
         <div id="countdown-wrapper">
             <div class="countdown-container">
-                <div id="countdown-timer">00:00:00:00</div>
+                <div id="countdown-timer">00:03:25:31</div>
             </div>
         </div>
         <div>
-            <button id="mint-action-btn" class="btn" disabled onclick="window.open('https://opensea.io/collection/plumpychums', '_blank')">MINT IS LOCKED</button>
+            <button id="mint-action-btn" class="btn" disabled onclick="window.open('https://opensea.io/collection/lilplumpys/overview', '_blank')">MINTING SOON</button>
         </div>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
             <div class="phase-card" id="phase1">
                 <div class="phase-status" id="status1">WAITING</div>
-                <h3>PHASE 01: PILLARS</h3>
-                <p>FREE | 19:00 - 20:00</p>
+                <h3>TEAM PHASE</h3>
+                <p>FREE | Feb 13, 20:00 (GMT+4)</p>
+                <p style="font-size: 0.8rem; margin-top: 5px;">Limit: 10 per wallet</p>
             </div>
             <div class="phase-card" id="phase2">
                 <div class="phase-status" id="status2">WAITING</div>
-                <h3>PHASE 02: GTD</h3>
-                <p>FREE | 20:00 - 21:00</p>
+                <h3>OG PHASE</h3>
+                <p>$0.59 | Feb 13, 21:00 (GMT+4)</p>
+                <p style="font-size: 0.8rem; margin-top: 5px;">Limit: 1 per wallet</p>
             </div>
             <div class="phase-card" id="phase3">
                 <div class="phase-status" id="status3">WAITING</div>
-                <h3>PHASE 03: FCFS</h3>
-                <p>0.0017 ETH | 21:00 - 22:00</p>
-            </div>
-            <div class="phase-card" id="phase4">
-                <div class="phase-status" id="status4">WAITING</div>
-                <h3>PHASE 04: PUBLIC</h3>
-                <p>0.003 ETH | 22:00+</p>
+                <h3>PUBLIC STAGE</h3>
+                <p>$0.98 | Feb 13, 22:00 (GMT+4)</p>
+                <p style="font-size: 0.8rem; margin-top: 5px;">Ends: Feb 16, 22:00</p>
             </div>
         </div>
     </section>
@@ -483,10 +475,10 @@
             <img src="https://cdn.discordapp.com/attachments/1458768504390946928/1468903553946091540/IMG_5277.png?ex=6985b68a&is=6984650a&hm=3b38bc89a921f2841f275eb7771fc7c53c1fff417928b5d0f74a852aca999d0d&" alt="Lil Plumpys" style="width: 100%; display: block;">
         </div>
         <div style="flex: 1; min-width: 300px;">
-            <div class="tag" style="background: var(--blue);">Coming Soon</div>
-            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1;">LIL PLUMPYS SNEAK PEEK</h2>
-            <p style="margin: 20px 0; font-weight: 700;">The next evolution. Smaller, plumper, and full of utility.</p>
-            <button class="btn" onclick="openWL()">GET WHITELISTED</button>
+            <div class="tag" style="background: var(--blue);">Base Chain</div>
+            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1;">LIL PLUMPYS ARE HERE</h2>
+            <p style="margin: 20px 0; font-weight: 700;">4,994 Items. The next evolution on Base. Smaller, plumper, and full of utility.</p>
+            <button class="btn" onclick="window.open('https://opensea.io/collection/lilplumpys/overview', '_blank')">VIEW ON OPENSEA</button>
         </div>
     </section>
 
@@ -549,11 +541,11 @@
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="this.parentElement.classList.toggle('active-faq')">HOW DO I PARTICIPATE IN MINT? <span>+</span></div>
-                <div class="faq-answer"><p>Connect your wallet (MetaMask/Rainbow) during your designated phase time on our official website or OpenSea launchpad.</p></div>
+                <div class="faq-answer"><p>Connect your wallet (MetaMask/Rainbow/Coinbase) during your designated phase time on OpenSea launchpad.</p></div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="this.parentElement.classList.toggle('active-faq')">WHAT IS THE TOTAL SUPPLY? <span>+</span></div>
-                <div class="faq-answer"><p>The Plumpy Chums collection has a strictly limited supply. Exact numbers for each collection are announced via our Discord announcements.</p></div>
+                <div class="faq-answer"><p>The Lil Plumpys collection has a supply of 4,994 items on the Base network.</p></div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="this.parentElement.classList.toggle('active-faq')">HOW CAN I EARN $CHUMBLE? <span>+</span></div>
@@ -578,7 +570,6 @@
         const intro = document.getElementById('intro-overlay');
         const container = intro;
         
-        // Create many "gathering" flakes
         for(let i=0; i<100; i++) {
             const flake = document.createElement('div');
             flake.classList.add('intro-flake', 'gathering');
@@ -591,11 +582,10 @@
             container.appendChild(flake);
         }
 
-        // Hide intro after 3 seconds
         setTimeout(() => {
             intro.style.opacity = '0';
             intro.style.visibility = 'hidden';
-            document.body.style.overflowY = 'auto'; // Re-enable scroll
+            document.body.style.overflowY = 'auto';
         }, 3000);
     });
 
@@ -613,7 +603,8 @@
 
     function updateMintStatus() {
         const now = new Date();
-        const start = new Date(2026, 1, 7, 19, 0, 0).getTime(); 
+        // Mint date: February 13, 2026 at 20:00 GMT+4
+        const start = new Date(2026, 1, 13, 20, 0, 0).getTime(); 
         const current = now.getTime();
         const diff = start - current;
         const timer = document.getElementById('countdown-timer');
@@ -628,14 +619,13 @@
         } else if (mBtn) {
             const wrap = document.getElementById('countdown-wrapper');
             if(wrap) wrap.style.display = 'none';
-            mBtn.disabled = false; mBtn.innerText = "MINT NOW";
+            mBtn.disabled = false; mBtn.innerText = "MINT ON OPENSEA";
         }
 
         const phases = [
             { id: "phase1", sid: "status1", s: start, e: start + 3600000 },
             { id: "phase2", sid: "status2", s: start + 3600000, e: start + 7200000 },
-            { id: "phase3", sid: "status3", s: start + 7200000, e: start + 10800000 },
-            { id: "phase4", sid: "status4", s: start + 10800000, e: Infinity }
+            { id: "phase3", sid: "status3", s: start + 7200000, e: Infinity }
         ];
 
         phases.forEach(p => {
@@ -654,7 +644,6 @@
     setInterval(updateMintStatus, 1000);
     updateMintStatus();
 
-    // Regular Snow Effect (Always running in background)
     function createSnow() {
         const s = document.getElementById('snow');
         if(!s) return;
